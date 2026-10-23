@@ -4,15 +4,10 @@ Build and Compare Lightweight vs Heavyweight Docker Images for a Python Applicat
 
 Build the same Python application on two base images, then compare sizes, run both containers, test them and document the results.
 
-| Image tag | Base image | Notes |
-|---|---|---|
-| `python-app:alpine` | `python:3.12-alpine` | Minimal, musl libc |
-| `python-app:standard` | `python:3.12` | Debian-based, full toolchain |
-
 ## Prerequisites
 - Docker installed and running (`docker --version`)
 - Git and a GitHub account (`git --version`)
-- `curl`
+- 
 
 ---
 
@@ -152,29 +147,23 @@ Host ports 8001 and 8002 both map to the app's port 8000 inside each container.
 ## Step 7: Test the application
 Alpine container:
 ```bash
-curl http://localhost:8080
-curl http://localhost:80
+ http://localhost:8080
+ http://localhost:80
 ```
 Standard container:
 ```bash
-curl http://localhost:8001/
-curl http://localhost:8000/health
+ http://localhost:8001/
+ http://localhost:8000/health
 ```
-Expected:
-- `/` returns `Hello from the Python Docker application!`
-- `/health` returns JSON with `status`, `application`, `hostname` (the container ID), `python_version`, and `base_image` (`python:3.12-alpine` or `python:3.12`)
 
-You can also open the four URLs in a browser.
+
 
 ## Step 8: Verify container status and logs
 ```bash
 docker ps
 docker logs containerID
 ```
-Confirm that:
-- Both containers show status `Up`
-- Each log contains `Application listening on port 8000`
-- Each log has request lines for the curl calls you made
+
 
 ## Step 9: Clean up
 ```bash
@@ -191,7 +180,7 @@ docker rmi docker_image_id - delete
 2. Commit and push the README:
    ```bash
    git add README.md
-   git commit -m "Document image size comparison results"
+   git commit -m "Completed"
    git push
 
    
